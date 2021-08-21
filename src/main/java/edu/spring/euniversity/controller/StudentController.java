@@ -68,7 +68,7 @@ public class StudentController {
             Student student = studentService.updateStudentById(studentWithUpdates, studentId);
             return new ResponseEntity<>(student.toString(), HttpStatus.OK);
         } catch (FoundNoInstanceException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{\"error\" : \"" + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
         }
     }
 }

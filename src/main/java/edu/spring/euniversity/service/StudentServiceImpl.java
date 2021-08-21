@@ -1,5 +1,6 @@
 package edu.spring.euniversity.service;
 
+import edu.spring.euniversity.exception.FoundNoInstanceException;
 import edu.spring.euniversity.model.Student;
 import edu.spring.euniversity.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student getStudentById(String studentId) {
-        return studentRepository.findById(studentId).orElseThrow();
+    public Student getStudentById(String studentId) throws FoundNoInstanceException {
+        return studentRepository.findById(studentId)
+                                .orElseThrow(() -> new FoundNoInstanceException("No student found with id: " + studentId));
     }
 
     @Override
-    public List<Student> createStudents(List<Student> students) {
-        students.forEach(student -> studentRepository.save(student));
-        return students;
+    public void createStudents(List<Student> students) {
+        studentRepository.saveAll(students);
     }
 }

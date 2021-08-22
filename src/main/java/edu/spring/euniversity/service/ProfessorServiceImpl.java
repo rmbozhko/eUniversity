@@ -33,8 +33,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Override
     public List<Professor> createProfessors(List<ProfessorDto> professors) {
         List<Professor> professorList = professors.stream()
-                .map(professorDto -> new Professor(UUID.randomUUID().toString(),
-                        professorDto.getName()))
+                .map(professorDto -> new Professor(professorDto.getName()))
                 .collect(Collectors.toList());
         professorRepository.saveAll(professorList);
         return professorList;

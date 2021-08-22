@@ -46,13 +46,13 @@ public class ProfessorController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Void>   deleteStudents() {
+    public ResponseEntity<Void>   deleteProfessors() {
         professorService.deleteProfessors();
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("{professorId}")
-    public ResponseEntity<Void> deleteStudentById(@PathVariable final String professorId) {
+    public ResponseEntity<Void> deleteProfessorById(@PathVariable final String professorId) {
         try {
             professorService.deleteProfessor(professorId);
             return ResponseEntity.noContent().build();
@@ -62,7 +62,7 @@ public class ProfessorController {
     }
 
     @PutMapping("{professorId}")
-    public ResponseEntity<String>   updateStudentById(@PathVariable final String professorId,
+    public ResponseEntity<String>   updateProfessorById(@PathVariable final String professorId,
                                                       @RequestBody final ProfessorDto professorWithUpdates) {
         try {
             Professor professor = professorService.updateProfessorById(professorWithUpdates, professorId);

@@ -1,19 +1,18 @@
 package edu.spring.euniversity.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@AllArgsConstructor
 @Getter
 @Setter
+@RequiredArgsConstructor
 @Document(value = "students")
 public class Student {
     @Id
     private final String id;
 
+    @NonNull
     private String name;
 
     @Override

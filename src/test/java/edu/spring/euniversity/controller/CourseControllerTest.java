@@ -322,4 +322,14 @@ class CourseControllerTest {
                 .andExpect(jsonPath("$.numberOfStudents", is(course.getStudents().size())));
     }
 
+    @Test
+    void    generateCoursesReportStatusCheck() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1/courses/report"))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    void    generateCoursesReportFileCheck() throws Exception {
+        Mockito.when(courseRepository.findAll()).thenReturn(courseList);
+    }
 }

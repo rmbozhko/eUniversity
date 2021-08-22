@@ -75,7 +75,7 @@ public class CourseController {
 
 
     @PutMapping("{courseId}/professor")
-    public ResponseEntity<String>   assignProfessorToCourse(@PathVariable final String courseId,
+    public ResponseEntity<String> assignProfessorToCourse(@PathVariable final String courseId,
                                                             @RequestBody final MongoDocumentReferencer professor) {
         try {
             Course course = courseService.assignProfessorToCourse(professor, courseId);
@@ -86,7 +86,7 @@ public class CourseController {
     }
 
     @PutMapping("{courseId}/students")
-    public ResponseEntity<String>   assignStudentsToCourse(@PathVariable final String courseId,
+    public ResponseEntity<String> assignStudentsToCourse(@PathVariable final String courseId,
                                                             @RequestBody final List<MongoDocumentReferencer> studentReferenceList) {
         try {
             Course course = courseService.assignStudentsToCourse(studentReferenceList, courseId);
@@ -94,6 +94,12 @@ public class CourseController {
         } catch (Exception e) {
             return new ResponseEntity<>("{\"error\" : \"" + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<Void> generateCoursesReport() {
+        courseService.generateCoursesReport();
+        return ResponseEntity.noContent().build();
     }
 }
 

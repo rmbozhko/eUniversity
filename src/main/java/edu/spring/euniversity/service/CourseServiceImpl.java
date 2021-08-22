@@ -13,6 +13,8 @@ import edu.spring.euniversity.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,5 +98,24 @@ public class CourseServiceImpl implements CourseService {
         course.setStudents(students);
         courseRepository.save(course);
         return course;
+    }
+
+    @Override
+    public void generateCoursesReport() {
+        try (PrintWriter pw = new PrintWriter("src/main/resources/report/report.csv")) {
+
+            StringBuilder builder = new StringBuilder();
+            builder.append("id,name,startDate,endDate,numberOfStudentsEnrolled,professor").append("\n");
+
+            for (Course course : courseRepository.findAll()) {
+                if (course.getStudents() != null && course.getStudents().size() > 2) {
+                    builder.append(course.getReportData()).append("\n");
+                }
+            }
+
+            pw.write(builder.toString());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

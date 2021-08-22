@@ -33,6 +33,11 @@ public class Course {
     @DBRef
     private List<Student> students;
 
+    public String getReportData() {
+        return id + "," + name + "," + startDate.toString() + "," + endDate.toString() + "," +
+                ((students != null) ? students.size() : 0) + "," + ((professor != null) ? professor.getName() : "");
+    }
+
     @Override
     public String toString() {
         return "{\n" +
@@ -41,8 +46,9 @@ public class Course {
                 "\",\n\"startDate\":\"" + startDate.toString() +
                 "\",\n\"endDate\":\"" + endDate.toString() +
                 "\",\n\"professor\":\"" + ((professor != null) ? professor.getName() : "") +
-                "\",\n\"numberOfStudents\":" + ((students != null) ? students.size() : "")+
+                "\",\n\"numberOfStudents\":" + ((students != null) ? students.size() : "\"\"")+
                 "}\n";
     }
+
 }
 

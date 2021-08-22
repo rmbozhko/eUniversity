@@ -22,4 +22,6 @@ public interface CourseService {
     Course assignProfessorToCourse(MongoDocumentReferencer professor, String courseId);
 
     Course assignStudentsToCourse(List<MongoDocumentReferencer> studentList, String courseId);
+
+    void generateCoursesReport();
 }

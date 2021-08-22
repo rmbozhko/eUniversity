@@ -140,6 +140,7 @@ class StudentControllerTest {
     @Test
     void updateStudentByIdWithCorrectId() throws Exception {
         Student student = studentList.get(new Random().nextInt(studentList.size()));
+        student.setName("Friedrich Gauss");
         Mockito.when(studentRepository.findById(student.getId())).thenReturn(java.util.Optional.of(student));
         Mockito.when(studentRepository.save(student)).thenReturn(student);
 

@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Document(value = "professors")

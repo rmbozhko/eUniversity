@@ -6,11 +6,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Document(value = "students")
 public class Student {
     @Id
-    private final String id;
+    private String id;
 
     @NonNull
     private String name;

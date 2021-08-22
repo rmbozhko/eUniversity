@@ -130,6 +130,7 @@ class ProfessorControllerTest {
     @Test
     void updateStudentByIdWithCorrectId() throws Exception {
         Professor professor = professorList.get(new Random().nextInt(professorList.size()));
+        professor.setName("Roman Bozhko");
         Mockito.when(professorRepository.findById(professor.getId())).thenReturn(java.util.Optional.of(professor));
         Mockito.when(professorRepository.save(professor)).thenReturn(professor);
 

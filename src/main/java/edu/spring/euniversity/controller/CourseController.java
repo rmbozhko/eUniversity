@@ -39,7 +39,7 @@ public class CourseController {
     @GetMapping("{courseId}")
     public ResponseEntity<String>   getCourseById(@PathVariable final String courseId) {
         try {
-            return new ResponseEntity<>(utility.buildJson(courseService.getCourseById(courseId)), HttpStatus.OK);
+            return new ResponseEntity<>(courseService.getCourseById(courseId).toString(), HttpStatus.OK);
         } catch (FoundNoInstanceException e) {
             return new ResponseEntity<>("{\"error\" : \"" + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
         }

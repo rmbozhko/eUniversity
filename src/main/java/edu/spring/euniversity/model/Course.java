@@ -9,8 +9,9 @@ import java.util.List;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor // for Mongo
+@RequiredArgsConstructor // for creation
+@AllArgsConstructor // for tests
 @Document(value = "courses")
 public class Course {
     @Id
@@ -28,5 +29,17 @@ public class Course {
     private Professor professor;
 
     private List<Student> students;
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "\"id\":\"" + id +
+                "\",\n\"name\":\"" + name +
+                "\",\n\"startDate\":\"" + startDate.toString() +
+                "\",\n\"endDate\":\"" + endDate.toString() +
+//                "\",\n\"professor\":\"" + professor.getName() +
+//                "\",\n\"numberOfStudents\":\"" + students.size() +
+                "\"}\n";
+    }
 }
 

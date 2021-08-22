@@ -1,5 +1,6 @@
 package edu.spring.euniversity.controller;
 
+import edu.spring.euniversity.controller.command.MongoDocumentReferencer;
 import edu.spring.euniversity.dto.CourseDto;
 import edu.spring.euniversity.exception.FoundNoInstanceException;
 import edu.spring.euniversity.model.Course;
@@ -73,15 +74,26 @@ public class CourseController {
     }
 
 
-//    @PostMapping("{courseId}/professor")
-//    public ResponseEntity<String>   assignProfessorToCourse(@PathVariable final String courseId,
-//                                                            @RequestBody final ) {
-//        try {
-//            Course course = courseService.assignProfessorToCourse(courseWithUpdates, courseId);
-//            return new ResponseEntity<>(course.toString(), HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>("{\"error\" : \"" + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
-//        }
-//    }
+    @PutMapping("{courseId}/professor")
+    public ResponseEntity<String>   assignProfessorToCourse(@PathVariable final String courseId,
+                                                            @RequestBody final MongoDocumentReferencer professor) {
+        try {
+            Course course = courseService.assignProfessorToCourse(professor, courseId);
+            return new ResponseEntity<>(course.toString(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("{\"error\" : \"" + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("{courseId}/students")
+    public ResponseEntity<String>   assignStudentsToCourse(@PathVariable final String courseId,
+                                                            @RequestBody final List<MongoDocumentReferencer> studentReferenceList) {
+        try {
+            Course course = courseService.assignStudentsToCourse(studentReferenceList, courseId);
+            return new ResponseEntity<>(course.toString(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("{\"error\" : \"" + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+        }
+    }
 }
 

@@ -2,6 +2,7 @@ package edu.spring.euniversity.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -26,8 +27,10 @@ public class Course {
     @NonNull
     private LocalDate endDate;
 
+    @DBRef
     private Professor professor;
-
+    
+    @DBRef
     private List<Student> students;
 
     @Override
@@ -37,9 +40,9 @@ public class Course {
                 "\",\n\"name\":\"" + name +
                 "\",\n\"startDate\":\"" + startDate.toString() +
                 "\",\n\"endDate\":\"" + endDate.toString() +
-//                "\",\n\"professor\":\"" + professor.getName() +
-//                "\",\n\"numberOfStudents\":\"" + students.size() +
-                "\"}\n";
+                "\",\n\"professor\":\"" + ((professor != null) ? professor.getName() : "") +
+                "\",\n\"numberOfStudents\":" + ((students != null) ? students.size() : "")+
+                "}\n";
     }
 }
 
